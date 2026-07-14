@@ -6,8 +6,8 @@ README mirrors. Creates missing docs for new implementations.
 
 ## When to use
 
-After merging a PR that changes behavior, adds features, or introduces new files.
-Run the `update-docs` skill to audit what docs need updating.
+Before merging a PR that changes behavior, adds features, or introduces new files,
+run the `update-docs` skill so documentation ships with the implementation.
 
 ## What it updates
 
@@ -29,7 +29,7 @@ plugins:
 
 ### From URL
 ```
-github://Molecule-AI/molecule-ai-plugin-molecule-skill-update-docs
+gitea://molecule-ai/molecule-ai-plugin-molecule-skill-update-docs#main
 ```
 
 ## License
