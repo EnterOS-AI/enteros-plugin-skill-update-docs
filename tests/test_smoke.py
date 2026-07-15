@@ -114,5 +114,33 @@ class TestValidatePlugin(unittest.TestCase):
         self.assertIn('molecule-skill-update-docs', result.stdout)
 
 
+class TestCurrentPlatformGuidance(unittest.TestCase):
+    """Keep the operational guidance aligned with the current Gitea platform."""
+
+    GUIDANCE_FILES = (
+        'README.md',
+        'CLAUDE.md',
+        '.gitea/scripts/gitea-merge-queue.py',
+        '.gitea/scripts/sop-checklist-gate.py',
+        '.gitea/workflows/sop-checklist-gate.yml',
+    )
+
+    def test_guidance_does_not_pin_retired_gitea_version(self):
+        for relative_path in self.GUIDANCE_FILES:
+            with self.subTest(path=relative_path):
+                path = os.path.join(REPO_ROOT, relative_path)
+                with open(path) as f:
+                    content = f.read()
+                self.assertNotIn('Gitea 1.22.6', content)
+
+    def test_install_source_is_canonical_gitea(self):
+        with open(os.path.join(REPO_ROOT, 'README.md')) as f:
+            content = f.read()
+        self.assertIn(
+            'gitea://molecule-ai/molecule-ai-plugin-molecule-skill-update-docs#main',
+            content,
+        )
+
+
 if __name__ == '__main__':
     unittest.main(verbosity=2)
