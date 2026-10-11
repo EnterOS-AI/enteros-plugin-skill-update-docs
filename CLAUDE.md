@@ -4,8 +4,8 @@ After any code change, review recent edits and update all documentation:
 architecture docs, API specs, edit history, README mirrors, runbooks, and
 `.env.example`. Creates missing documentation for new implementations.
 
-Run this skill after merging a PR that changes behavior, adds features, or
-introduces new files.
+Run this skill before merging a PR that changes behavior, adds features, or
+introduces new files so documentation ships with the implementation.
 
 **Version:** 1.0.0
 **Runtime:** `claude_code`, `hermes`
@@ -65,7 +65,7 @@ molecule-skill-update-docs/
 
 | Topic | Convention |
 |---|---|
-| **When to run** | After merging a PR; explicitly triggered by `/update-docs` |
+| **When to run** | Before merging a behavior-changing PR; explicitly triggered by `/update-docs` |
 | **Edit history** | One session file per date: `docs/edit-history/YYYY-MM-DD.md` |
 | **Env vars** | All vars read by code must be in `.env.example` with a comment |
 | **README sync** | `README.zh-CN.md` must mirror `README.md` — never let them drift |
@@ -85,7 +85,7 @@ diff <(grep -h 'process.env' src/**/*.ts | sed 's/.*process.env.\([A-Z_]*\).*/\1
      <(grep '^#\|^[A-Z]' .env.example | sed 's/ .*//' | sort -u)
 
 # Run the skill (if Hermes/cron context)
-# After a PR merge, invoke via the update-docs skill or /update-docs command
+# Before merging a behavior-changing PR, invoke the update-docs skill or /update-docs command
 ```
 
 ---
